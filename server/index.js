@@ -20,7 +20,7 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
-const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_HOST + ':' + process.env.DB_PASSWORD + '@mmd.xmfwp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@mmd.xmfwp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 // const CONNECTION_URL = 'mongodb://mongo:27017/docker-node-mongo';
 
 // Set default to 8000 if there is no PORT variable
