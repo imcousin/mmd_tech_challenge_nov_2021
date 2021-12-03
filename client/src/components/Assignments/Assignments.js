@@ -19,7 +19,6 @@ const Assignments = () => {
         // user does not exists
         localStorage.removeItem('token')
         // return to login
-        // window.location.href('/');
         navigate('/')
       }
       else {
