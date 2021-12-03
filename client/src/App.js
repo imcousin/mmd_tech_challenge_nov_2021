@@ -4,9 +4,6 @@ import Login from './components/Login/Login';
 import Assignments from './components/Assignments/Assignments';
 
 function App() {
-  const token = localStorage.getItem('token');
-  console.log('token? ', token);
-
   return (
     <div className="App">
       <BrowserRouter>
