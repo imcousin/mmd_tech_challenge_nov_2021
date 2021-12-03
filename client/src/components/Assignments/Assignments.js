@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Assignment from './Assignment/Assignment';
+import Assignment1 from './Assignment1.js';
+import Assignment2 from './Assignment2.js';
+import Assignment3 from './Assignment3.js';
 import jwt from "jsonwebtoken";
 import { useNavigate } from 'react-router-dom';
 
 const Assignments = () => {
   const navigate = useNavigate();
-  // const [setAssignments] = useState('')
+  // Declare a new state variable assignments
+  // useState hook function returns a getter variable, setter function
+  const [assignments, setAssignments] = useState('')
 
   // Do after render
   useEffect(() => {
@@ -37,18 +42,22 @@ const Assignments = () => {
         'x-access-token': localStorage.getItem('token'),
       }
     })
-    // console.log('req: ',req)
 
-    const assignemnts_data = await req.json();
-    if (!assignemnts_data.length) {
+    const assignments_data = await req.json();
+    if (!assignments_data.length) {
       console.log('no assignments')
     }
     else {
-      console.log('have assignments', assignemnts_data)
-      // setAssignments(assignemnts_data)
+      console.log('have assignments', assignments_data)
+      // [{_id: '61a8015bcb41cb0ab0f9b072', question: 'When was BCIT's 50th-aniversary celebration?', answers: {"answer1": "2016", "answer2": "1967","answer3": "2017", "answer4": "1987"}: '', date: '2021-12-03T18:45:44.256Z'}, {_id: '61a801c0cb41cb0ab0f9b073', question: 'Which of the following services does the LTC provide? Select all that apply.', answers: {"answer1": "Technical illustration", "answer2": "Instructional design","answer3": "Financial advice", "answer4": "Admission and Registration", "answer5": "Audio-visual loans"}: '', date: '2021-12-03T18:45:44.256Z'}, {_id: '61a801eccb41cb0ab0f9b074', question: 'The current Prime Minister in Canada is (include the starting year of the PM)', answers: {"answer1": ""}: '', date: '2021-12-03T18:45:44.256Z'}]
+      for (let i = 0; i < assignments_data.length; i++) {
+        setAssignments( assignments => [...assignments, assignments_data[i]] )
+      }
+      console.log('hihi1 ', assignments_data[0]); // {_id: '61a8015bcb41cb0ab0f9b072', question: 'When was BCIT's 50th-aniversary celebration?', answers: {"answer1": "2016", "answer2": "1967","answer3": "2017", "answer4": "1987"}: '', date: '2021-12-03T18:45:44.256Z'}
+      console.log('hihi 2 ', assignments[0]); // undefined
     }
   }
-  
+
   // const classes = useStyles();
 
   // return (
@@ -65,8 +74,9 @@ const Assignments = () => {
   return (
     <>
       <h1>assignments component</h1>
-      <Assignment />
-      <Assignment />
+      <Assignment1 />
+      <Assignment2 />
+      <Assignment3 />
     </>
   )
 };
