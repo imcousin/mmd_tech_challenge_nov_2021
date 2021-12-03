@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 
 // user model
 import User from "./models/User.js";
+import Assignment from "./models/Assignment.js";
 
 // Load env variables
 dotenv.config();
@@ -70,6 +71,13 @@ app.post('/users/login', async (req, res) => {
   }
 })
 
-app.get('assignments', () => {
-  
+app.get('/assignments', async (req, res) => {
+  console.log('inside assignments')
+  try {
+    const assignments = await Assignment.find();
+            
+    return res.status(200).json(assignments);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
 })

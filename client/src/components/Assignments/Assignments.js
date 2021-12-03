@@ -9,9 +9,7 @@ const Assignments = () => {
 
   async function populateAssignments() {
     console.log('inside getAssignments')
-    const req = await fetch('http://localhost:8080/assignments', {
-
-    })
+    const req = await fetch('http://localhost:8080/assignments')
     console.log('req: ',req)
 
     const data = await req.json();
