@@ -4,38 +4,51 @@ import jwt from "jsonwebtoken";
 import { useNavigate } from 'react-router-dom';
 
 const Assignments = () => {
-  const history = useNavigate();
-  const [quote, setAssignments] = useState('')
+  const navigate = useNavigate();
+  // const [setAssignments] = useState('')
+
+  // Do after render
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log('ass token', token);
+    if (token) {
+      const user = jwt.decode(token)
+      console.log('user: ', user);
+      if (!user) {
+        console.log('no user')
+        // user does not exists
+        localStorage.removeItem('token')
+        // return to login
+        // window.location.href('/');
+        navigate('/')
+      }
+      else {
+        console.log('have token');
+        populateAssignments()
+      }
+    } else {
+      navigate('/')
+    }
+  }, [])
 
   async function populateAssignments() {
     console.log('inside getAssignments')
-    const req = await fetch('http://localhost:8080/assignments')
-    console.log('req: ',req)
+    const req = await fetch('http://localhost:8080/assignments',{
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      }
+    })
+    // console.log('req: ',req)
 
-    const data = await req.json();
-    console.log('data ', data)
-    if (data.status === 'ok') {
-      setAssignments(data)
-      console.log('have assignments', data)
-    }
-    else {
+    const assignemnts_data = await req.json();
+    if (!assignemnts_data.length) {
       console.log('no assignments')
     }
-  }
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      const user = jwt.decode(token)
-      if (!user) {
-        localStorage.removeItem('token')
-        history.replaceState('/')
-      }
-      else {
-        populateAssignments()
-      }
+    else {
+      console.log('have assignments', assignemnts_data)
+      // setAssignments(assignemnts_data)
     }
-  }, [])
+  }
   
   // const classes = useStyles();
 
