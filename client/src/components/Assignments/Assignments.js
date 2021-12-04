@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import Assignment from './Assignment/Assignment';
-// import Assignment1 from './Assignment1.js';
-// import Assignment2 from './Assignment2.js';
-// import Assignment3 from './Assignment3.js';
+import Assignment from './Assignment/Assignment';
 import jwt from "jsonwebtoken";
 import { useNavigate } from 'react-router-dom';
 
@@ -87,53 +84,7 @@ const Assignments = () => {
       <h1>assignments component</h1>
       {assignments.map((assignment, i) => {
         return(
-          <form key={i}>
-            <p>{i+1}) {assignment.question}</p>
-            {assignment.answers_type === 'radio' &&
-              Object.keys(assignment.answers).map((key,i) => {
-                return (
-                  <label className="inline-flex items-center" key={i}>
-                    <input 
-                      type="radio"
-                      id={i}
-                      className="form-radio"
-                      name="radio"
-                      value={assignment.answers[key]}
-                    />
-                    <span className="ml-2">{assignment.answers[key]}</span>
-                  </label>
-                );
-              })
-            }
-
-            {assignment.answers_type === 'checkbox' &&
-              Object.keys(assignment.answers).map((key,i) => {
-                return (
-                  <label className="inline-flex items-center" key={i}>
-                    <input 
-                      type="checkbox"
-                      className="form-checkbox"
-                      value={assignment.answers[key]}
-                    />
-                    <span className="ml-2">{assignment.answers[key]}</span>
-                  </label>
-                );
-              })
-            }
-            {assignment.answers_type === 'text' &&
-              <input 
-                type="text"
-                className=""
-                name="prime_minister"
-              />
-            }
-
-            <input 
-            type="submit"
-            className=""
-            name="submit"
-          />
-          </form>
+          <Assignment key={i} assignment={assignment} index={i} />
         )
       })}
     </>

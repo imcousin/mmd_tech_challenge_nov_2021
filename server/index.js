@@ -81,3 +81,26 @@ app.get('/assignments', async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 })
+
+app.post('/student_assignments', async (req, res) => {
+  console.log('inside student_assignments')
+  console.log('student_ass', req.body);
+
+  const user = await User.findOne({
+    email: req.body.email
+  })
+
+  if (!user) {
+    console.log('user not in db');
+    return res.status(400).json({ status: 'error', error: 'Invalid Login' })
+  }
+
+  const newStudentAssignment = new StudentAssignment({ title, message, selectedFile, creator, tags })
+
+  try {
+    await newStudentAssignment.save();
+    return res.status(200).json({saved: true});
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+})

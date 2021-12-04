@@ -11,7 +11,7 @@ const Login = () => {
     console.log('inside loginUser');
 
     // Need to validate email
-    const response = await fetch('http://localhost:8080/users/login', {
+    await fetch('http://localhost:8080/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,28 +20,31 @@ const Login = () => {
         email, password
       })
     })
-
-    console.log('response: ', response);
-
-    const data = await response.json();
-
-    if (data.user) {
-      localStorage.setItem('token', data.user);
-      console.log('Login successful');
-
-      const user = jwt.decode(data.user);
-      if (user.admin) {
-        console.log('instructor');
-        window.location.href = '/instructor'
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.user) {
+        localStorage.setItem('token', data.user);
+        console.log('Login successful');
+  
+        const user = jwt.decode(data.user);
+        if (user.admin) {
+          console.log('instructor');
+          window.location.href = '/instructor'
+        }
+        else {
+          console.log('students');
+          window.location.href = '/assignments'
+        }
       }
       else {
-        console.log('students');
-        window.location.href = '/assignments'
+        alert('Wrong email and password.')
       }
-    }
-    else {
-      alert('Wrong email and password.')
-    }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
   }
 
   return (
