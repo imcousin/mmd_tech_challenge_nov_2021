@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const AssignmentSchema = new Schema({
+const StudentAssignmentSchema = new Schema({
   studentID: {
     type: String,
     required: [true, "Student required"]
   },
+  assignmentID: {
+    type: String,
+    required: [true, "Assignment required"]
+  },
   answers: {
-    type: Map,
-    required: [true, "Student required"]
+    type: Map
   },
   date: {
     type: Date,
@@ -16,5 +19,5 @@ const AssignmentSchema = new Schema({
   }
 });
 
-const Assignment = mongoose.model('Assignment', AssignmentSchema);
-export default Assignment;
+const StudentAssignment = mongoose.model('StudentAssignment', StudentAssignmentSchema);
+export default StudentAssignment;

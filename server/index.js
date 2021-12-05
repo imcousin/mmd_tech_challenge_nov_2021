@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken';
 // user model
 import User from "./models/User.js";
 import Assignment from "./models/Assignment.js";
+import StudentAssignment from "./models/StudentAssignment.js";
 
 // Load env variables
 dotenv.config();
@@ -85,17 +86,24 @@ app.get('/assignments', async (req, res) => {
 app.post('/student_assignments', async (req, res) => {
   console.log('inside student_assignments')
   console.log('student_ass', req.body);
+  // ex. body = {"answer1": 'answer'} must be json
 
+  // pass in user email
   const user = await User.findOne({
     email: req.body.email
   })
-
   if (!user) {
     console.log('user not in db');
     return res.status(400).json({ status: 'error', error: 'Invalid Login' })
   }
 
-  const newStudentAssignment = new StudentAssignment({ title, message, selectedFile, creator, tags })
+  // validate primeminister
+  
+
+  const newStudentAssignment = new StudentAssignment({ 
+    "studentID": user.email, 
+    "assignmentID": req.body.assignmentID, 
+    "answers": req.body.answers })
 
   try {
     await newStudentAssignment.save();
