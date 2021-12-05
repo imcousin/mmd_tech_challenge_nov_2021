@@ -48,7 +48,7 @@ class Assignment extends React.Component {
     })
   }
 
-   handleChange(e) {
+  handleChange(e) {
     // validate
     let str = e.target.value;
     let str_split = str.split(/\W+/);
@@ -64,7 +64,7 @@ class Assignment extends React.Component {
           // do something
           console.log('good priminister');
           this.setState({ answers: { primeMinister: e.target.value } }, () =>{
-           console.log('primeMinister state: ', this.state.answers);
+            console.log('primeMinister state: ', this.state.answers);
           })
         }
         else {

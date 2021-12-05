@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 import User from "./models/User.js";
 import Assignment from "./models/Assignment.js";
 import StudentAssignment from "./models/StudentAssignment.js";
+import StudentAssignmentMark from "./models/StudentAssignmentMark.js";
 
 // Load env variables
 dotenv.config();
@@ -136,3 +137,56 @@ app.post('/student_assignments', async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 })
+
+
+
+app.post('/student_assignments_mark', async (req, res) => {
+  console.log('inside student_assignments_mark', req.body)
+  // ex. body = {"answer1": 'answer'} must be json
+  
+  // pass in user instructor
+  const instructor = await User.findOne({
+    _id: req.body.instructorID
+  })
+  if (!instructor) {
+    console.log('instructor not in db');
+    return res.status(400).json({ status: 'error', error: 'Invalid Instructor' })
+  }
+
+  const studentAssignment = await StudentAssignmentMark.findOne({
+    studentID: req.body.studentID,
+    assignmentID: req.body.assignmentID, 
+  })
+
+
+  // NO duplicate
+  if(studentAssignment) {
+    return res.status(404).json({ message: 'Student assignment mark already exists.' });
+  } else {
+    const newStudentAssignmentMark = new StudentAssignmentMark({
+      "instructorID": instructor.id, 
+      "studentID": req.body.studentID, 
+      "assignmentID": req.body.assignmentID, 
+      "mark": Number(req.body.mark)
+    })
+    
+    try {
+      await newStudentAssignmentMark.save();
+      return res.status(200).json({saved: true});
+      console.log('5')
+    } catch (error) {
+      return res.status(404).json({ message: error.message });
+    }
+  }
+
+})
+
+async function checkUser(studentID) {
+  const user = await User.findOne({
+    _id: studentID
+  })
+  if (!user) {
+    console.log('user not in db');
+    return res.status(400).json({ status: 'error', error: 'Invalid User' })
+  }
+}

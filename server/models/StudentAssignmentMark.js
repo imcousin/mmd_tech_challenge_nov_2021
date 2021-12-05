@@ -18,8 +18,8 @@ const StudentAssignmentMarkSchema = new Schema({
     type: Number,
     required: [true, "Mark required"],
     immutable: true, // cannot be update
-    min: 0,
-    max: 100,
+    // min: 0,
+    // max: 100,
     validate: {
       validator: Number.isInteger,
       message: '{VALUE} is not an integer value'
@@ -30,6 +30,8 @@ const StudentAssignmentMarkSchema = new Schema({
     default: Date.now
   }
 });
+
+StudentAssignmentMarkSchema.index({ studentID: 1, assignmentID: 1}, { unique: true });
 
 const StudentAssignmentMark = mongoose.model('StudentAssignmentMark', StudentAssignmentMarkSchema);
 export default StudentAssignmentMark;
