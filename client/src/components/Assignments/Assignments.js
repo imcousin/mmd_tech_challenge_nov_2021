@@ -80,14 +80,14 @@ const Assignments = () => {
   //   )
   // );
   return (
-    <>
-      <h1>assignments component</h1>
+    <div className="w-full max-w-xl mx-auto">
+      <h1 className="text-3xl font-bold mb-8 text-center">Assignments</h1>
       {assignments.map((assignment, i) => {
         return(
           <Assignment key={i} assignment={assignment} index={i} />
         )
       })}
-    </>
+    </div>
   )
 };
 

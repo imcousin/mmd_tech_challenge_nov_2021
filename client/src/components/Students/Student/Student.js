@@ -12,14 +12,12 @@ class Student extends React.Component {
   render() {
     return (
       <>
-        <p>
-          <Link
-            className="navbar-item"
-            to={'/instructor/student_assignments/'+this.props.student._id}
-          >
-            {this.props.student.email}
-          </Link>
-        </p>
+        <Link
+          className="text-blue-800 no-underline hover:underline"
+          to={'/instructor/student_assignments/'+this.props.student._id}
+        >
+          {this.props.student.email}
+        </Link>
       </>
     )
   }

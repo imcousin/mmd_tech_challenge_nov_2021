@@ -100,28 +100,28 @@ class StudentAssignments extends React.Component {
 
   render() {
     return (
-      <>
-        <p>
+      <div className="w-full max-w-xl mx-auto">
+        <p className="mb-5">
           <Link
-            className="navbar-item"
+            className="text-blue-800 no-underline hover:underline"
             to="/instructor"
           >
-            Back to Students
+            &lt; Back to Students
           </Link>
         </p>
-        <h1>student assignments</h1>
+        <h1 className="text-3xl font-bold mb-8">Student Assignments</h1>
           {this.state.assignments.map((assignment, i) => {
             return(
               Object.keys(assignment.answers).map((key,i) => {
                 return (
-                  <form key={i} onSubmit={this.handleSubmit(assignment)}>
-                    <p className="ml-2">Assignment Question: id {assignment.assignmentID}</p>
-                    <p className="ml-2">Answers:</p>
+                  <form key={i} onSubmit={this.handleSubmit(assignment)} className="px-2 py-4 border-b-2">
+                    <h2>Assignment Question id: {assignment.assignmentID}</h2>
+                    <h3>Answers:</h3>
                     {(typeof assignment.answers[key] === 'string') &&
-                      <p>{assignment.answers[key]}</p>
+                      <p className="text-xl font-bold">{assignment.answers[key]}</p>
                     }
                     {Array.isArray(assignment.answers[key]) &&
-                      <ul>
+                      <ul className="list-disc list-inside text-black-600 py-2 text-xl font-bold">
                         {assignment.answers[key].map((data,i)=> {
                           return (
                             <li key={i}>{data}</li>
@@ -137,15 +137,16 @@ class StudentAssignments extends React.Component {
                       max="100"
                       value={this.state.mark} 
                       onChange={this.handleChange} 
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
-                    <input type="submit" />
-                    <hr />
+                    <br />
+                    <input type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-3 w-full" value="Mark" />
                   </form>
                 );
               })
             )
           })}
-      </>
+      </div>
     )
   }
 };

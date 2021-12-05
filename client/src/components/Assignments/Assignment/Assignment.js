@@ -132,23 +132,25 @@ class Assignment extends React.Component {
 
   render() {
     return (
-      <>
-        <p>{this.props.index+1}) {this.props.assignment.question}</p>
+      <div className="mb-10 border-b-2 pb-10">
+        <p className="font-bold">{this.props.index+1}) {this.props.assignment.question}</p>
         <form onSubmit={this.handleSubmit(this.props.assignment._id)}>
           {this.props.assignment.answers_type === 'radio' &&
             Object.keys(this.props.assignment.answers).map((key,i) => {
               return (
-                <label className="inline-flex items-center" key={i}>
-                  <input 
-                    type="radio"
-                    id={i}
-                    className="form-radio"
-                    name="radio"
-                    value={this.props.assignment.answers[key]}
-                    onChange={() => this.handleRadio(this.props.assignment.answers[key])}
-                  />
-                  <span className="ml-2">{this.props.assignment.answers[key]}</span>
-                </label>
+                <div className="mt-2">
+                  <label className="inline-flex items-center" key={i}>
+                    <input 
+                      type="radio"
+                      id={i}
+                      className="form-radio"
+                      name="radio"
+                      value={this.props.assignment.answers[key]}
+                      onChange={() => this.handleRadio(this.props.assignment.answers[key])}
+                    />
+                    <span className="ml-2">{this.props.assignment.answers[key]}</span>
+                  </label>
+                </div>
               );
             })
           }
@@ -156,39 +158,43 @@ class Assignment extends React.Component {
           {this.props.assignment.answers_type === 'checkbox' &&
             Object.keys(this.props.assignment.answers).map((key,i) => {
               return (
-                <label className="inline-flex items-center" key={i}>
-                  <input 
-                    type="checkbox"
-                    className="form-checkbox"
-                    value={this.props.assignment.answers[key]}
-                    checked={this.state.checked}
-                    onChange={this.handleCheckbox}
-                    name={'checkbox_'+key}
-                  />
-                  <span className="ml-2">{this.props.assignment.answers[key]}</span>
-                </label>
+                <div className="mt-2">
+                  <label className="inline-flex items-center" key={i}>
+                    <input 
+                      type="checkbox"
+                      className="form-checkbox"
+                      value={this.props.assignment.answers[key]}
+                      checked={this.state.checked}
+                      onChange={this.handleCheckbox}
+                      name={'checkbox_'+key}
+                    />
+                    <span className="ml-2">{this.props.assignment.answers[key]}</span>
+                  </label>
+                </div>
               );
             })
           }
   
           {this.props.assignment.answers_type === 'text' &&
-            <input 
-              type="text"
-              className=""
-              name="prime_minister"
-              value={this.state.primeMinister}
-              onChange={this.handleChange}
-            />
+            <div className="mt-2">
+              <input 
+                type="text"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="prime_minister"
+                value={this.state.primeMinister}
+                onChange={this.handleChange}
+              />
+            </div>
           } 
           
           <input 
             type="submit"
-            className=""
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-3 w-full"
             name="submit"
           />
         </form>
         
-      </>
+      </div>
     )
   }
 };
