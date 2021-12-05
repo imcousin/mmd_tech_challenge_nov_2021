@@ -7,7 +7,7 @@ class Assignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      studentID: '',
       assignmentID: '',
       answers: {
         aniversary: '',
@@ -95,9 +95,9 @@ class Assignment extends React.Component {
         // navigate('/')
       }
       else {
-        this.setState({ email: user.email }, () => {
+        this.setState({ studentID: user.id }, () => {
           // need to run inside/after setstate
-          console.log('user state', this.state.email);
+          console.log('user state', this.state.studentID);
           this.setState({ assignmentID: assignmentID }, () => {
             // need to run inside/after setstate
             console.log('current state, ', this.state);

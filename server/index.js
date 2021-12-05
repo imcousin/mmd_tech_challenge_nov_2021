@@ -61,6 +61,7 @@ app.post('/users/login', async (req, res) => {
   if (isPasswordValid) {
     console.log('pw valid');
     const token = jwt.sign({
+      id: user._id,
       email: user.email,
       admin: user.admin
     }, 'secret123')
@@ -83,6 +84,29 @@ app.get('/assignments', async (req, res) => {
   }
 })
 
+app.get('/student_assignments', async (req, res) => {
+  console.log('inside student_assignments')
+  try {
+    const studentAssignments = await StudentAssignment.find({ studentID: req.query.studentID });
+            
+    return res.status(200).json(studentAssignments);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+})
+
+app.get('/students', async (req, res) => {
+  console.log('inside students')
+  try {
+    const students = await User.find({ admin: false });
+    console.log(students);
+            
+    return res.status(200).json(students);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+})
+
 app.post('/student_assignments', async (req, res) => {
   console.log('inside student_assignments')
   console.log('student_ass', req.body);
@@ -90,7 +114,7 @@ app.post('/student_assignments', async (req, res) => {
 
   // pass in user email
   const user = await User.findOne({
-    email: req.body.email
+    _id: req.body.studentID
   })
   if (!user) {
     console.log('user not in db');
@@ -98,10 +122,10 @@ app.post('/student_assignments', async (req, res) => {
   }
 
   // validate primeminister
-  
+
 
   const newStudentAssignment = new StudentAssignment({ 
-    "studentID": user.email, 
+    "studentID": user._id, 
     "assignmentID": req.body.assignmentID, 
     "answers": req.body.answers })
 
