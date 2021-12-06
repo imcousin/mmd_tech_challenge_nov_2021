@@ -76,7 +76,7 @@ Things you need to use the software and how to install them.
 
 ### Client and Server Installation
 
-_Below is an example of how you can installing and setting up your app. This template  rely on external dependency or service of remote MongoDB at the moment._
+_Below is an example of how you can installing and setting up your app. This template rely on external dependency or service of remote MongoDB at the moment._
 
 1. Clone the repo
    ```sh
@@ -91,7 +91,8 @@ _Below is an example of how you can installing and setting up your app. This tem
     DB_USER=mmdadmin
     DB_PASSWORD=mmdadmin123
    ```
-5. Open 1 terminal for each client and server. Use npm to start both application in their folder separatly.
+5. Uncomment the server/index.js line 28 to enable remote connection to mongodb cloud. And comment out line 30 to disable container db.
+6. Open 1 terminal for each client and server. Use npm to start both application in their folder separatly.
    ```sh
     npm start
    ```
@@ -101,7 +102,7 @@ _Below is an example of how you can installing and setting up your app. This tem
 
 ### Docker Compose Installation
 
-_Below is an example of how you can installing and setting up your app. This template  rely on external dependency or service of remote MongoDB at the moment._
+_Below is an example of how you can installing and setting up your app._
 
 1. Clone the repo
    ```sh
