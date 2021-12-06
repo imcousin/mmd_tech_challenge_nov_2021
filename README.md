@@ -82,7 +82,7 @@ _Below is an example of how you can installing and setting up your app. This tem
    ```sh
    git clone https://github.com/imcousin/mmd_tech_challenge_nov_2021
    ```
-3. Install NPM packages
+3. Go to both client and server folder and Install NPM packages
    ```sh
    npm install
    ```
@@ -90,6 +90,10 @@ _Below is an example of how you can installing and setting up your app. This tem
    ```sh
     DB_USER=mmdadmin
     DB_PASSWORD=mmdadmin123
+   ```
+5. Open 1 terminal for each client and server. Use npm to start both application in their folder separatly.
+   ```sh
+    npm start
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
