@@ -4,7 +4,7 @@ COPY init-data2.json /init-data2.json
 
 CMD mongoimport                                 \
     # Host (docker-compose service name)
-    --host mongogodb                        \
+    --host mongodb                        \
     # user and pass from .env file
     --username mmdadmin      \
     --password mmdadmin123      \
