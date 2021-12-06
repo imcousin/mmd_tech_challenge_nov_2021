@@ -74,7 +74,7 @@ Things you need to use the software and how to install them.
   npm install npm@latest -g
   ```
 
-### Installation
+### Client and Server Installation
 
 _Below is an example of how you can installing and setting up your app. This template  rely on external dependency or service of remote MongoDB at the moment._
 
@@ -98,6 +98,21 @@ _Below is an example of how you can installing and setting up your app. This tem
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+### Docker Compose Installation
+
+_Below is an example of how you can installing and setting up your app. This template  rely on external dependency or service of remote MongoDB at the moment._
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/imcousin/mmd_tech_challenge_nov_2021
+   ```
+2. Go to application root folder and run docker compose up
+   ```sh
+   docker compose up
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
