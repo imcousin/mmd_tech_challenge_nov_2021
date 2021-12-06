@@ -25,9 +25,9 @@ app.use(cors());
 
 
 // REMOTE
-const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@mmd.xmfwp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+// const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@mmd.xmfwp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 // DOCKER
-// const CONNECTION_URL = "mongodb://mmdadmin:mmdadmin123@mongodb:27017/";
+const CONNECTION_URL = "mongodb://mmdadmin:mmdadmin123@mongodb:27017/";
 
 // Set default to 8000 if there is no PORT variable
 const PORT = process.env.PORT || 8080;

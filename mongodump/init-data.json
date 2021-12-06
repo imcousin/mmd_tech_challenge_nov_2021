@@ -1,0 +1,17 @@
+[
+  {
+      "email": "teacher@teacher.com",
+      "password": "$2a$10$HY62vPlRdeAMKfbYKX5YS.empjW3jbx21kh7pcysgDKiawdGk5Oui",
+      "admin": true
+  },
+  {
+      "email": "student1@student.com",
+      "password": "$2a$10$m0ptEC6nG0A6EUPHPc9SFuFTggXVpPUcw7CufVTCK1k8ldAI22wom",
+      "admin": false
+  },
+  {
+      "email": "student2@student.com",
+      "price": "$2a$10$jEEw593/olbRwZqMIhNbo.ZLg9FALj5zxfOQ0D7Farx.JyeJ3c7kO",
+      "admin": false
+  }
+]

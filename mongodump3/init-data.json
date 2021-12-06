@@ -1,0 +1,27 @@
+[
+  {
+    "question": "When was BCIT's 50th-aniversary celebration?",
+    "answers": {
+        "answer1": "2016",
+        "answer2": "1967",
+        "answer3": "2017",
+        "answer4": "1987"
+    },
+    "answers_type": "radio"
+  },
+  {
+      "question": "Which of the following services does the LTC provide? Select all that apply.",
+      "answers": {
+            "answer1": "Technical illustration",
+            "answer2": "Instructional design",
+            "answer3": "Financial advice",
+            "answer4": "Admission and Registration",
+            "answer5": "Audio-visual loans"
+      },
+      "answers_type": "checkbox"
+  },
+  {
+      "question": "The current Prime Minister in Canada is (include the starting year for the PM)",
+      "answers_type": "text"
+  }
+]

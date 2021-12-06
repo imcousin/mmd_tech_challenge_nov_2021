@@ -36,6 +36,18 @@ services:
     volumes:
       - ./client/:/app
     stdin_open: true
+  mongo-seed:
+    build: ./mongodump/
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  mongo-assignment-seed:
+    build: ./mongodump3/
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
 
 volumes:
  mongodb:
