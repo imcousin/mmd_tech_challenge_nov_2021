@@ -1,5 +1,6 @@
 import React from 'react';
 import jwt from "jsonwebtoken";
+import LogoutButton from '../../../LogoutButton/LogoutButton';
 import { Link } from 'react-router-dom';
 
 class StudentAssignments extends React.Component {
@@ -15,6 +16,29 @@ class StudentAssignments extends React.Component {
   }
   
   componentDidMount() {
+    //  Admin check
+    const token = localStorage.getItem('token');
+    // const navigate = useNavigate();
+    if (token) {
+      const user = jwt.decode(token)
+      console.log('user assment: ', user);
+      if (!user) {
+        console.log('no user')
+        // user does not exists
+        localStorage.removeItem('token')
+        // return to login
+        window.location.replace("/")
+      } else {
+        if (user.admin) {
+          console.log('admin');
+        } else {
+          window.location.replace("/")
+        }
+      }
+    } else {
+      window.location.replace("/")
+    }
+
     let studentID = window.location.pathname.split('/').pop();
 
     // Need to validate email; add student assignment
@@ -68,31 +92,35 @@ class StudentAssignments extends React.Component {
         // user does not exists
         localStorage.removeItem('token')
         // return to login
-        // navigate('/')
+        window.location.href("/")
       } else {
-        // Need to validate email; add student assignment
-        fetch('http://localhost:8080/student_assignments_mark', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            instructorID: user.id, 
-            studentID: studentAssignment.studentID, 
-            assignmentID: studentAssignment.assignmentID, 
-            mark: this.state.mark
+        if (user.admin) {
+          // Need to validate email; add student assignment
+          fetch('http://localhost:8080/student_assignments_mark', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              instructorID: user.id, 
+              studentID: studentAssignment.studentID, 
+              assignmentID: studentAssignment.assignmentID, 
+              mark: this.state.mark
+            })
           })
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        } else {
+          window.location.href("/")
+        }
       }
     } else {
-      // navigate('/')
+      window.location.href("/")
     }
 
   }
@@ -101,6 +129,7 @@ class StudentAssignments extends React.Component {
   render() {
     return (
       <div className="w-full max-w-xl mx-auto">
+        <LogoutButton />
         <p className="mb-5">
           <Link
             className="text-blue-800 no-underline hover:underline"

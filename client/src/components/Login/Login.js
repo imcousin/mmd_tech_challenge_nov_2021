@@ -51,8 +51,8 @@ const Login = () => {
     <div className="w-full max-w-xs mx-auto">
       <form onSubmit={loginUser} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h1 className="mb-5">Login</h1>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
             Email
           </label>
           <input 
@@ -63,8 +63,8 @@ const Login = () => {
             placeholder="Email"
           />
         </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Student from './Student/Student';
 import jwt from "jsonwebtoken";
+import LogoutButton from '../LogoutButton/LogoutButton';
 import { useNavigate } from 'react-router-dom';
 
 const Students = () => {
@@ -11,6 +12,7 @@ const Students = () => {
 
   // Do after render
   useEffect(() => {
+    //  Admin check
     const token = localStorage.getItem('token');
     console.log('inst token', token);
     if (token) {
@@ -25,19 +27,23 @@ const Students = () => {
       }
       else {
         console.log('have token');
-        fetch('http://localhost:8080/students',{
-          headers: {
-            'x-access-token': localStorage.getItem('token'),
-          }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('setting students')
-          setStudents(data);
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+        if (user.admin) {
+          fetch('http://localhost:8080/students',{
+            headers: {
+              'x-access-token': localStorage.getItem('token'),
+            }
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('setting students')
+            setStudents(data);
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        } else {
+          navigate('/')
+        }
       }
     } else {
       navigate('/')
@@ -46,6 +52,7 @@ const Students = () => {
 
   return (
     <div>
+      <LogoutButton />
       <table className="table-auto w-full border-2 border-collapse border border-black-800 max-w-xl mx-auto">
         <thead>
           <tr>
@@ -55,7 +62,7 @@ const Students = () => {
         <tbody>
           {students.map((student, i) => {
             return(
-              <tr>
+              <tr key={i}>
                 <td className="border-2 px-4 py-2 font-flow text-black-400">{i+1}. <Student key={i} student={student} index={i} /></td>
               </tr>
             )

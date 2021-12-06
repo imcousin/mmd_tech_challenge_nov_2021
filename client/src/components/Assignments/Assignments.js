@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Assignment from './Assignment/Assignment';
+import LogoutButton from '../LogoutButton/LogoutButton';
 import jwt from "jsonwebtoken";
 import { useNavigate } from 'react-router-dom';
 
@@ -81,6 +82,7 @@ const Assignments = () => {
   // );
   return (
     <div className="w-full max-w-xl mx-auto">
+      <LogoutButton />
       <h1 className="text-3xl font-bold mb-8 text-center">Assignments</h1>
       {assignments.map((assignment, i) => {
         return(

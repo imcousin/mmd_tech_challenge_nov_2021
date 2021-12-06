@@ -23,8 +23,11 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
+
+// REMOTE
 const CONNECTION_URL = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@mmd.xmfwp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-// const CONNECTION_URL = 'mongodb://mongo:27017/docker-node-mongo';
+// DOCKER
+// const CONNECTION_URL = "mongodb://mmdadmin:mmdadmin123@mongodb:27017/";
 
 // Set default to 8000 if there is no PORT variable
 const PORT = process.env.PORT || 8080;
@@ -33,13 +36,22 @@ const PORT = process.env.PORT || 8080;
 // Connecting to mongodb
 // Set options to suppress warnings in console
 mongoose.connect(CONNECTION_URL)
-  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
-  .catch((error) => console.log(`${error} did not connect`));
+  .then(() => app.listen(PORT, () => console.log(`MONGODB +++++++++++ Server Running on Port: http://localhost:${PORT}`)))
+  .catch((error) => console.log(`${error} did not connect. BADDDDDD MONGODB`));
 
 
 
 
 // Routes
+app.get('/', async (req, res) => {
+  console.log('inside assignments')
+  try {
+    return res.status(200).json({message: 'server running.'});
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+})
+
 app.post('/users/login', async (req, res) => {
   console.log('/users/login');
   console.log(req.body);
@@ -58,6 +70,12 @@ app.post('/users/login', async (req, res) => {
     req.body.password,
     user.password
   )
+
+  // let isPasswordValid = false;
+  // if(req.body.password ===
+  //   user.password) {
+  //   isPasswordValid = true;
+  // }
 
   if (isPasswordValid) {
     console.log('pw valid');
@@ -103,6 +121,18 @@ app.get('/students', async (req, res) => {
     console.log(students);
             
     return res.status(200).json(students);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+})
+
+app.get('/instructors', async (req, res) => {
+  console.log('inside instructors')
+  try {
+    const instructors = await User.find({ admin: true });
+    console.log(instructors);
+            
+    return res.status(200).json(instructors);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
@@ -178,6 +208,38 @@ app.post('/student_assignments_mark', async (req, res) => {
       return res.status(404).json({ message: error.message });
     }
   }
+
+})
+
+
+
+
+app.post('/seed_users', async (req, res) => {
+  console.log('inside seed_users')
+  // ex. body = {"answer1": 'answer'} must be json
+
+  // const saltRounds = 10;
+  // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+    // Now we can store the password hash in db.
+
+    const newUser = new User({
+      "email": "teacher@teacher.com", 
+      "password": '123123',
+      "admin": true
+    })
+    
+    try {
+      await newUser.save();
+      return res.status(200).json({saved: true});
+      console.log('5')
+    } catch (error) {
+      return res.status(404).json({ message: error.message });
+    }
+
+
+  // });
+
+  
 
 })
 

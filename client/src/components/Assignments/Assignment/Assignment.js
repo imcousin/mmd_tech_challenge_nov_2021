@@ -138,7 +138,7 @@ class Assignment extends React.Component {
           {this.props.assignment.answers_type === 'radio' &&
             Object.keys(this.props.assignment.answers).map((key,i) => {
               return (
-                <div className="mt-2">
+                <div className="mt-2" key={i}>
                   <label className="inline-flex items-center" key={i}>
                     <input 
                       type="radio"
@@ -158,7 +158,7 @@ class Assignment extends React.Component {
           {this.props.assignment.answers_type === 'checkbox' &&
             Object.keys(this.props.assignment.answers).map((key,i) => {
               return (
-                <div className="mt-2">
+                <div className="mt-2" key={i}>
                   <label className="inline-flex items-center" key={i}>
                     <input 
                       type="checkbox"
