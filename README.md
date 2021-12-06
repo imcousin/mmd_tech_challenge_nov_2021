@@ -87,9 +87,9 @@ _Below is an example of how you can installing and setting up your app. This tem
    npm install
    ```
 4. Create and enter your ENV variables in `.env` under the server folder
-   ```env
-  DB_USER=mmdadmin
-  DB_PASSWORD=mmdadmin123
+   ```sh
+    DB_USER=mmdadmin
+    DB_PASSWORD=mmdadmin123
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
