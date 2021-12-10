@@ -120,17 +120,13 @@ _Below is an example of how you can installing and setting up your app._
 
 Instructor login have been seeded as
 email: 'teacher@teacher.com'
-pw: '123123'
 
 In order for a instructor user to see student assignments for marking, a student will need to submit student assignments first.
 
 Student logins have been seeded as
 email: 'studentone@student.com'
-pw: '123123'
 email: 'studenttwo@student.com'
-pw: '123123'
 email: 'studentthree@student.com'
-pw: '123123'
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
